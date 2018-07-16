@@ -12,3 +12,7 @@ Write a simple terminal app to allow two players to play the card game ‘Go Fis
 * When a player has four of a kind (a ‘book’), they lay them face up on the table;
 * When all the books are won, the game ends;
 * The player with the most books wins.
+
+## Scheme example
+
+Look in the `racket` folder. Run `make test` to run the tests.
