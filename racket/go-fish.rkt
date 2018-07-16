@@ -2,7 +2,7 @@
 
 (require rackunit rackunit/text-ui)
 
-(define game-tests
+(run-tests
   (test-suite
    "Go Fish! game tests"
    (test-case
@@ -11,4 +11,3 @@
       (check-equal? (plus 41 1) 42 "Simple addition")
       (check-equal? (mult 6 9) 42 "Simple multiplication")))))
 
-(run-tests game-tests)
