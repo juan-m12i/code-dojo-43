@@ -4,6 +4,8 @@
 
 (define first car)
 (define second cadr)
+(define suits '("Spade" "Heart" "Diamond" "Club"))
+(define values '("2" "3" "4" "5" "6" "7" "8" "9" "10" "Jack" "Queen" "King" "Ace"))
 
 (define (new-game)
   "Creates a new game object, with two players, each of which has seven cards"
@@ -13,7 +15,8 @@
   "Draws a random card, each card has a:
      Suit: one of Spade, Heart, Diamond or Club
      Value: one of 2,3,4,5,6,7,8,9,10,Jack,Queen,King or Ace"
-  '("Ace" "Spade"))
+  (list (list-ref values (random 1 13))
+        (list-ref suits (random 1 4))))
 
 (run-tests
   (test-suite
@@ -21,13 +24,17 @@
    (test-case
     "Drawing a card should result in a card that is a Spade, Heart, Diamond or Club"
     (let ([card (draw-card)])
-      (check-not-false (member (second card) '("Spade" "Heart" "Diamond" "Club")))))
+      (check-not-false (member (second card) suits))))
 
    (test-case
     "Drawing a card should result in a card that is a two to an Ace in value"
     (let ([card (draw-card)])
-      (check-not-false (member (first card) '("2" "3" "4" "5" "6" "7" "8" "9" "10" "Jack" "Queen" "King" "Ace")))))
+      (check-not-false (member (first card) values))))
 
+   (test-case
+    "Drawing a second card should be different from the first"
+    (let ([first-card (draw-card)][second-card (draw-card)])
+      (check-not-equal? first-card second-card "two consecutive draws should be different")))
 
    (test-case
     "A new game should have two players with seven cards each"
