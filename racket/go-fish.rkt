@@ -1,11 +1,14 @@
 #lang racket/base
 
-(require rackunit rackunit/text-ui)
+(require rackunit rackunit/text-ui racket/list)
 
 (define first car)
 (define second cadr)
 (define suits '("Spade" "Heart" "Diamond" "Club"))
 (define values '("2" "3" "4" "5" "6" "7" "8" "9" "10" "Jack" "Queen" "King" "Ace"))
+
+(define deck ;; a standard 52 card deck
+  (cartesian-product values suits))
 
 (define (new-game)
   "Creates a new game object, with two players, each of which has seven cards"
@@ -44,8 +47,6 @@
       (check-equal? 7 (length (second my-game)) "player one should have seven cards")))
 
    (test-case
-    "Check unit tests work"
-    (let ([plus +][mult *])
-      (check-equal? (plus 41 1) 42 "Simple addition")
-      (check-equal? (mult 6 7) 42 "Simple multiplication")))))
+    "A new deck should have 52 cards"
+    (check-equal? 52 (length deck)))))
 
